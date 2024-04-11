@@ -1,16 +1,12 @@
 # warehouse
 
-A new Flutter project.
+Первоначальные условия:
 
-## Getting Started
+Предварительно получить auth токен, которым должен быть подписан запрос из метода https://hcateringback-dev.unitbeandev.com/api/auth/login креды для получения токена: admin/admin.
 
-This project is a starting point for a Flutter application.
+Curl валидного авторизованного запроса:
 
-A few resources to get you started if this is your first Flutter project:
+curl --location 'https://hcateringback-dev.unitbeandev.com/api/items?warehouseId=6aac3263-ca1f-4b4e-8973-3a948873d9de&page=1&pageSize=10' \
+--header 'Authorization: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMjM1MDgwMH0.PYtv4lvnbN7L6Tt71oVN8xPuK_36OUikIFqp5KPi-t4fOObulnXUjx_CfxuvEH-50oFvzSisTvt8pcL4hzqIHA' \
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ => экран с пагинированной таблицей (учесть настраиваемое количество отображаемых на странице айтемов - со звездочкой) и поиском по названию для отображения номенклатурных позиций.
