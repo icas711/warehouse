@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart';
 import 'package:warehouse/bloc_observable.dart';
 
 import 'package:warehouse/ui/pages/home_page.dart';
 
 void main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
   BlocOverrides.runZoned(() => runApp(MyApp()),
     blocObserver: WarehouseBlocObservable(),
   );
@@ -24,6 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Warehouse',
+
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.white,
@@ -42,9 +39,25 @@ class MyApp extends StatelessWidget {
               fontSize: 11.0, fontWeight: FontWeight.w100, color: Colors.black),
         ),
       ),
+
       home: HomePage(title: 'Warehouse'),
     );
   }
 }
-
+class ScrollBehaviorModified extends ScrollBehavior {
+  const ScrollBehaviorModified();
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    switch (getPlatform(context)) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+      case TargetPlatform.android:
+        return const BouncingScrollPhysics();
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return const ClampingScrollPhysics();
+    }
+  }
+}
 

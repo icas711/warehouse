@@ -8,7 +8,6 @@ class CustomListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(result.id);
     return Container(
       height: MediaQuery.of(context).size.height / 9,
       //color: const Color.fromRGBO(86, 86, 86, 0.8),

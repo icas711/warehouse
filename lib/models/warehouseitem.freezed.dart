@@ -177,12 +177,12 @@ Item _$ItemFromJson(Map<String, dynamic> json) {
 mixin _$Item {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   String? get measurement_units => throw _privateConstructorUsedError;
   String? get deposit => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
   int? get min_quantity => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
+  int? get price => throw _privateConstructorUsedError;
   int? get rent_price => throw _privateConstructorUsedError;
   int? get accounting_price => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
@@ -201,12 +201,12 @@ abstract class $ItemCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String description,
+      String? description,
       String? measurement_units,
       String? deposit,
       String? code,
       int? min_quantity,
-      int price,
+      int? price,
       int? rent_price,
       int? accounting_price,
       String? type,
@@ -228,12 +228,12 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
+    Object? description = freezed,
     Object? measurement_units = freezed,
     Object? deposit = freezed,
     Object? code = freezed,
     Object? min_quantity = freezed,
-    Object? price = null,
+    Object? price = freezed,
     Object? rent_price = freezed,
     Object? accounting_price = freezed,
     Object? type = freezed,
@@ -248,10 +248,10 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       measurement_units: freezed == measurement_units
           ? _value.measurement_units
           : measurement_units // ignore: cast_nullable_to_non_nullable
@@ -268,10 +268,10 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
           ? _value.min_quantity
           : min_quantity // ignore: cast_nullable_to_non_nullable
               as int?,
-      price: null == price
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       rent_price: freezed == rent_price
           ? _value.rent_price
           : rent_price // ignore: cast_nullable_to_non_nullable
@@ -302,12 +302,12 @@ abstract class _$$ItemImplCopyWith<$Res> implements $ItemCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String description,
+      String? description,
       String? measurement_units,
       String? deposit,
       String? code,
       int? min_quantity,
-      int price,
+      int? price,
       int? rent_price,
       int? accounting_price,
       String? type,
@@ -326,12 +326,12 @@ class __$$ItemImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
+    Object? description = freezed,
     Object? measurement_units = freezed,
     Object? deposit = freezed,
     Object? code = freezed,
     Object? min_quantity = freezed,
-    Object? price = null,
+    Object? price = freezed,
     Object? rent_price = freezed,
     Object? accounting_price = freezed,
     Object? type = freezed,
@@ -346,10 +346,10 @@ class __$$ItemImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       measurement_units: freezed == measurement_units
           ? _value.measurement_units
           : measurement_units // ignore: cast_nullable_to_non_nullable
@@ -366,10 +366,10 @@ class __$$ItemImplCopyWithImpl<$Res>
           ? _value.min_quantity
           : min_quantity // ignore: cast_nullable_to_non_nullable
               as int?,
-      price: null == price
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       rent_price: freezed == rent_price
           ? _value.rent_price
           : rent_price // ignore: cast_nullable_to_non_nullable
@@ -415,7 +415,7 @@ class _$ItemImpl implements _Item {
   @override
   final String name;
   @override
-  final String description;
+  final String? description;
   @override
   final String? measurement_units;
   @override
@@ -425,7 +425,7 @@ class _$ItemImpl implements _Item {
   @override
   final int? min_quantity;
   @override
-  final int price;
+  final int? price;
   @override
   final int? rent_price;
   @override
@@ -500,12 +500,12 @@ abstract class _Item implements Item {
   const factory _Item(
       {required final String id,
       required final String name,
-      required final String description,
+      required final String? description,
       required final String? measurement_units,
       required final String? deposit,
       required final String? code,
       required final int? min_quantity,
-      required final int price,
+      required final int? price,
       required final int? rent_price,
       required final int? accounting_price,
       required final String? type,
@@ -518,7 +518,7 @@ abstract class _Item implements Item {
   @override
   String get name;
   @override
-  String get description;
+  String? get description;
   @override
   String? get measurement_units;
   @override
@@ -528,7 +528,7 @@ abstract class _Item implements Item {
   @override
   int? get min_quantity;
   @override
-  int get price;
+  int? get price;
   @override
   int? get rent_price;
   @override

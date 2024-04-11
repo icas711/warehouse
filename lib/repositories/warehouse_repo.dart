@@ -9,10 +9,10 @@ class WarehouseRepo {
       'https://hcateringback-dev.unitbeandev.com/api/items?warehouseId=6aac3263-ca1f-4b4e-8973-3a948873d9de';
 
   Future<WarehouseItem> getWarehouseItems(
-      int page, int pageSize, String token) async {
+      int page, int pageSize, String sortBy, String sortOrder, String token) async {
     try {
       final response = await http.get(
-        Uri.parse('$url&page=$page&pageSize=$pageSize'),
+        Uri.parse('$url&page=$page&pageSize=$pageSize&sortBy=$sortBy&sortOrder=$sortOrder'),
         headers: <String, String>{'Authorization': token},
       );
       var jsonResult = json.decode(utf8.decode(response.bodyBytes));
