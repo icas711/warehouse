@@ -1,8 +1,7 @@
 # warehouse
+Стэк: bloc & annotation freezed
 
-Первоначальные условия:
-
-Предварительно получить auth токен, которым должен быть подписан запрос из метода https://hcateringback-dev.unitbeandev.com/api/auth/login креды для получения токена: admin/admin.
+Получаем auth токен, которым должен быть подписан запрос из метода https://hcateringback-dev.unitbeandev.com/api/auth/login. Креды для получения токена: admin/admin.
 
 Curl валидного авторизованного запроса:
 
