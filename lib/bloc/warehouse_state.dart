@@ -4,6 +4,7 @@ part of 'warehouse_bloc.dart';
 class WarehouseState with _$WarehouseState {
   const factory WarehouseState.loading() = WarehouseStateLoading;
 
+
   const factory WarehouseState.loaded({
     required WarehouseItem warehouseItemLoaded,
   }) = WarehouseStateLoaded;

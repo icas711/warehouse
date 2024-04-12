@@ -15,8 +15,6 @@ class TokenRepo {
         },
         body: json.encode({'login': login, 'password': password}),
       );
-      print(response.statusCode);
-      print(response.body);
       Map<String, dynamic> map = json.decode(response.body);
       //String basicAuth = map['access_token'];
       return Token.fromJson(map);

@@ -18,27 +18,28 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WarehouseEvent {
   int get page => throw _privateConstructorUsedError;
   int get pageSize => throw _privateConstructorUsedError;
+  String get itemName => throw _privateConstructorUsedError;
   String get sortBy => throw _privateConstructorUsedError;
   String get sortOrder => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int page, int pageSize, String sortBy,
-            String sortOrder, String token)
+    required TResult Function(int page, int pageSize, String itemName,
+            String sortBy, String sortOrder, String token)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int page, int pageSize, String sortBy, String sortOrder,
-            String token)?
+    TResult? Function(int page, int pageSize, String itemName, String sortBy,
+            String sortOrder, String token)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int page, int pageSize, String sortBy, String sortOrder,
-            String token)?
+    TResult Function(int page, int pageSize, String itemName, String sortBy,
+            String sortOrder, String token)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -72,7 +73,12 @@ abstract class $WarehouseEventCopyWith<$Res> {
       _$WarehouseEventCopyWithImpl<$Res, WarehouseEvent>;
   @useResult
   $Res call(
-      {int page, int pageSize, String sortBy, String sortOrder, String token});
+      {int page,
+      int pageSize,
+      String itemName,
+      String sortBy,
+      String sortOrder,
+      String token});
 }
 
 /// @nodoc
@@ -90,6 +96,7 @@ class _$WarehouseEventCopyWithImpl<$Res, $Val extends WarehouseEvent>
   $Res call({
     Object? page = null,
     Object? pageSize = null,
+    Object? itemName = null,
     Object? sortBy = null,
     Object? sortOrder = null,
     Object? token = null,
@@ -103,6 +110,10 @@ class _$WarehouseEventCopyWithImpl<$Res, $Val extends WarehouseEvent>
           ? _value.pageSize
           : pageSize // ignore: cast_nullable_to_non_nullable
               as int,
+      itemName: null == itemName
+          ? _value.itemName
+          : itemName // ignore: cast_nullable_to_non_nullable
+              as String,
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -128,7 +139,12 @@ abstract class _$$WarehouseEventFetchImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int page, int pageSize, String sortBy, String sortOrder, String token});
+      {int page,
+      int pageSize,
+      String itemName,
+      String sortBy,
+      String sortOrder,
+      String token});
 }
 
 /// @nodoc
@@ -144,6 +160,7 @@ class __$$WarehouseEventFetchImplCopyWithImpl<$Res>
   $Res call({
     Object? page = null,
     Object? pageSize = null,
+    Object? itemName = null,
     Object? sortBy = null,
     Object? sortOrder = null,
     Object? token = null,
@@ -157,6 +174,10 @@ class __$$WarehouseEventFetchImplCopyWithImpl<$Res>
           ? _value.pageSize
           : pageSize // ignore: cast_nullable_to_non_nullable
               as int,
+      itemName: null == itemName
+          ? _value.itemName
+          : itemName // ignore: cast_nullable_to_non_nullable
+              as String,
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -179,6 +200,7 @@ class _$WarehouseEventFetchImpl implements WarehouseEventFetch {
   _$WarehouseEventFetchImpl(
       {required this.page,
       required this.pageSize,
+      required this.itemName,
       required this.sortBy,
       required this.sortOrder,
       required this.token});
@@ -188,6 +210,8 @@ class _$WarehouseEventFetchImpl implements WarehouseEventFetch {
   @override
   final int pageSize;
   @override
+  final String itemName;
+  @override
   final String sortBy;
   @override
   final String sortOrder;
@@ -196,7 +220,7 @@ class _$WarehouseEventFetchImpl implements WarehouseEventFetch {
 
   @override
   String toString() {
-    return 'WarehouseEvent.fetch(page: $page, pageSize: $pageSize, sortBy: $sortBy, sortOrder: $sortOrder, token: $token)';
+    return 'WarehouseEvent.fetch(page: $page, pageSize: $pageSize, itemName: $itemName, sortBy: $sortBy, sortOrder: $sortOrder, token: $token)';
   }
 
   @override
@@ -207,6 +231,8 @@ class _$WarehouseEventFetchImpl implements WarehouseEventFetch {
             (identical(other.page, page) || other.page == page) &&
             (identical(other.pageSize, pageSize) ||
                 other.pageSize == pageSize) &&
+            (identical(other.itemName, itemName) ||
+                other.itemName == itemName) &&
             (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
             (identical(other.sortOrder, sortOrder) ||
                 other.sortOrder == sortOrder) &&
@@ -214,8 +240,8 @@ class _$WarehouseEventFetchImpl implements WarehouseEventFetch {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, page, pageSize, sortBy, sortOrder, token);
+  int get hashCode => Object.hash(
+      runtimeType, page, pageSize, itemName, sortBy, sortOrder, token);
 
   @JsonKey(ignore: true)
   @override
@@ -227,33 +253,33 @@ class _$WarehouseEventFetchImpl implements WarehouseEventFetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int page, int pageSize, String sortBy,
-            String sortOrder, String token)
+    required TResult Function(int page, int pageSize, String itemName,
+            String sortBy, String sortOrder, String token)
         fetch,
   }) {
-    return fetch(page, pageSize, sortBy, sortOrder, token);
+    return fetch(page, pageSize, itemName, sortBy, sortOrder, token);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int page, int pageSize, String sortBy, String sortOrder,
-            String token)?
+    TResult? Function(int page, int pageSize, String itemName, String sortBy,
+            String sortOrder, String token)?
         fetch,
   }) {
-    return fetch?.call(page, pageSize, sortBy, sortOrder, token);
+    return fetch?.call(page, pageSize, itemName, sortBy, sortOrder, token);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int page, int pageSize, String sortBy, String sortOrder,
-            String token)?
+    TResult Function(int page, int pageSize, String itemName, String sortBy,
+            String sortOrder, String token)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(page, pageSize, sortBy, sortOrder, token);
+      return fetch(page, pageSize, itemName, sortBy, sortOrder, token);
     }
     return orElse();
   }
@@ -291,6 +317,7 @@ abstract class WarehouseEventFetch implements WarehouseEvent {
   factory WarehouseEventFetch(
       {required final int page,
       required final int pageSize,
+      required final String itemName,
       required final String sortBy,
       required final String sortOrder,
       required final String token}) = _$WarehouseEventFetchImpl;
@@ -299,6 +326,8 @@ abstract class WarehouseEventFetch implements WarehouseEvent {
   int get page;
   @override
   int get pageSize;
+  @override
+  String get itemName;
   @override
   String get sortBy;
   @override

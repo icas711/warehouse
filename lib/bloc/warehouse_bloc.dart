@@ -22,7 +22,7 @@ class WarehouseBloc extends Bloc<WarehouseEvent, WarehouseState> {
       emit(const WarehouseState.loading());
       try {
         final _warehouseLoaded = await warehouseRepo.getWarehouseItems(
-            event.page, event.pageSize,event.sortBy, event.sortOrder, event.token).timeout(const Duration(seconds: 10));
+            event.page, event.pageSize, event.itemName, event.sortBy, event.sortOrder, event.token).timeout(const Duration(seconds: 10));
         emit(WarehouseState.loaded(warehouseItemLoaded: _warehouseLoaded));
       } catch (_) {
         emit(const WarehouseState.error());

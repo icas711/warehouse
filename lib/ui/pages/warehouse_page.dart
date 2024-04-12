@@ -14,9 +14,6 @@ class WarehousePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Список'),
-      ),
       body: BlocProvider(
         create: (context) => WarehouseBloc(warehouseRepo: repository),
         child: Container(

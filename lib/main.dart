@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:warehouse/bloc_observable.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:warehouse/ui/pages/home_page.dart';
 
 void main() async {
@@ -20,7 +20,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Warehouse',
-
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('ru'), // English
+        Locale('en'), // Spanish
+      ],
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.white,

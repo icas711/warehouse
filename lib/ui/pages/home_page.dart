@@ -18,12 +18,8 @@ class HomePage extends StatelessWidget {
         create: (context) => TokenBloc(
           tokenRepo: RepositoryProvider.of(context),
         ),
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            title: Text(title),
-          ),
-          body: const ShowSignInButton(),
+        child: const Scaffold(
+          body: ShowSignInButton(),
         ),
       ),
     );
