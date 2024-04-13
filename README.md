@@ -1,4 +1,6 @@
 # warehouse
+Склад/Учет
+
 Стэк: bloc & annotation freezed
 
 Получаем auth токен, которым должен быть подписан запрос из метода https://hcateringback-dev.unitbeandev.com/api/auth/login. Креды для получения токена: admin/admin.
@@ -12,3 +14,8 @@ curl --location 'https://hcateringback-dev.unitbeandev.com/api/items?warehouseId
 
 => создание/редактирование номенклатурных позиций. Метод для создания: https://hcateringback-dev.unitbeandev.com/api/items. POSt Метод для редактирования: https://hcateringback-dev.unitbeandev.com/api/items/{id}. PATCH
 Cоздание по нажатию на кнопку "Новая позиция", редактирование - по нажатию на иконку карандаша напротив номенклатурной позиции. В режиме редактирования в заголовке модалки вместо "Новвая позиция" отображать название редактируемой позиции.
+![1](https://github.com/icas711/warehouse/assets/50333299/cc8179b8-53d4-4948-a1fd-ed36cf0ae1ad)
+
+![2](https://github.com/icas711/warehouse/assets/50333299/beabfe55-61e2-42fd-aa7b-0e012fcd7961)
+
+![3](https://github.com/icas711/warehouse/assets/50333299/e6111096-33d3-471b-945e-6b05f897b9dc)
