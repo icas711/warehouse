@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:warehouse/bloc/warehouse_bloc.dart';
-import 'package:warehouse/models/warehouseitem.dart';
 import 'package:warehouse/ui/pages/widgets/row_data.dart';
 
 class CustomListView extends StatelessWidget {
@@ -50,9 +47,11 @@ class CustomListView extends StatelessWidget {
               showEmptyRows: false,
               source: dataSource!,
               rowsPerPage: pageSize,
+              dataRowMinHeight:50,
+              dataRowMaxHeight: 100,
               availableRowsPerPage: const [10, 20, 50],
               onRowsPerPageChanged: (value) => onRowsPerPageChanged(value),
-              columnSpacing: 18,
+              //columnSpacing: 18,
               onPageChanged: (value) async => onPageChanged(value),
               columns: [
                 DataColumn(
