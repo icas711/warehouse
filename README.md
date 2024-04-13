@@ -10,9 +10,12 @@ Curl валидного авторизованного запроса:
 curl --location 'https://hcateringback-dev.unitbeandev.com/api/items?warehouseId=6aac3263-ca1f-4b4e-8973-3a948873d9de&page=1&pageSize=10' \
 --header 'Authorization: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMjM1MDgwMH0.PYtv4lvnbN7L6Tt71oVN8xPuK_36OUikIFqp5KPi-t4fOObulnXUjx_CfxuvEH-50oFvzSisTvt8pcL4hzqIHA' \
 
- => экран с пагинированной таблицей (учесть настраиваемое количество отображаемых на странице айтемов - со звездочкой) и поиском по названию для отображения номенклатурных позиций.
+=> экран с пагинированной таблицей, с учет настраиваемого количества отображаемых элементов на странице и поиском по названию для отображения номенклатурных позиций.
 
-=> создание/редактирование номенклатурных позиций. Метод для создания: https://hcateringback-dev.unitbeandev.com/api/items. POSt Метод для редактирования: https://hcateringback-dev.unitbeandev.com/api/items/{id}. PATCH
+=> создание/редактирование номенклатурных позиций.
+Метод для создания: https://hcateringback-dev.unitbeandev.com/api/items. POST
+Метод для редактирования: https://hcateringback-dev.unitbeandev.com/api/items/{id}. PATCH
+
 Cоздание по нажатию на кнопку "Новая позиция", редактирование - по нажатию на иконку карандаша напротив номенклатурной позиции. В режиме редактирования в заголовке модалки вместо "Новвая позиция" отображать название редактируемой позиции.
 ![1](https://github.com/icas711/warehouse/assets/50333299/cc8179b8-53d4-4948-a1fd-ed36cf0ae1ad)
 
