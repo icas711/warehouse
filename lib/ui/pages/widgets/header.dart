@@ -7,11 +7,11 @@ import 'package:warehouse/service/constants.dart';
 
 class HeaderWidget extends StatefulWidget {
   const HeaderWidget(
-      {super.key, required this.currentItem, required this.token, required this.onChanged});
+      {super.key, required this.currentItem, required this.token, required this.reload});
 
   final int currentItem;
   final String token;
-final Function onChanged;
+final Function reload;
 
   @override
   State<HeaderWidget> createState() => _HeaderWidgetState();
@@ -94,7 +94,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               ),
               InkWell(
                 onTap: () {
-                  widget.onChanged(itemName);},
+                  widget.reload(itemName);},
                 child: const SizedBox(
                   height: 35,
                   width: 90,
@@ -117,7 +117,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.read<EditBloc>().add(EditEvent.add());
+                  },
                   child: const SizedBox(
                     height: 35,
                    // width: 90,

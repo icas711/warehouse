@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:warehouse/bloc/warehouse_bloc.dart';
 import 'package:warehouse/models/warehouseitem.dart';
+import 'package:warehouse/ui/pages/widgets/add_item_widget.dart';
+import 'package:warehouse/ui/pages/widgets/custom_list_view.dart';
+import 'package:warehouse/ui/pages/widgets/edit_widget.dart';
 import 'package:warehouse/ui/pages/widgets/header.dart';
 import 'package:warehouse/ui/pages/widgets/row_data.dart';
 
@@ -26,20 +29,13 @@ class _WarehouseListState extends State<WarehouseList> {
   int pageSize = 10;
   bool sort = false;
   List<Item>? filterData;
-  bool _isPagination = true;
+  bool _isPagination = false;
   int initialFirstRowIndex = 0;
   String sortOrder = 'ASC';
   String itemName = '';
-
-  onsortColum(int columnIndex) {
-    context.read<WarehouseBloc>().add(WarehouseEvent.fetch(
-        page: currentPage,
-        pageSize: pageSize,
-        itemName: itemName,
-        sortBy: 'name',
-        sortOrder: sortOrder,
-        token: widget.token));
-  }
+  bool showEditDialog = false;
+  Item? currentEditItem;
+  RowSource? dataSource;
 
   @override
   void initState() {
@@ -60,42 +56,102 @@ class _WarehouseListState extends State<WarehouseList> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<WarehouseBloc>().state;
-
+    final stateEdit = context.watch<EditBloc>().state;
     return state.when(
       loading: () {
+        context.read<EditBloc>().add(EditEvent.idle());
         return _circularIndicator();
       },
       loaded: (warehouseLoaded) {
         _currentItem = warehouseLoaded;
-        if (_isPagination) {
+        setState(() {
           _currentResults.addAll(_currentItem.result);
-          _isPagination = false;
+        });
+        if (_isPagination) {
+          setState(() {
+            _isPagination = false;
+          });
+          dataSource = RowSource(
+            myData: _currentItem.result,
+            count: _currentItem.total,
+            onEdit: _onEdit,
+          );
         } else {
-          _currentResults = _currentItem.result;
+          if (dataSource == null) {
+            dataSource = RowSource(
+              myData: _currentItem.result,
+              count: _currentItem.total,
+              onEdit: _onEdit,
+            );
+          } else {
+            dataSource!.addRow(_currentResults);
+          }
         }
+
         return SingleChildScrollView(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                HeaderWidget(
-                  currentItem: _currentItem.total,
-                  token: widget.token,
-                  onChanged: _onChanged,
+          child: Stack(
+            children: [
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    HeaderWidget(
+                      currentItem: _currentItem.total,
+                      token: widget.token,
+                      reload: _search,
+                    ),
+                    _currentResults.isNotEmpty
+                        ? CustomListView(
+                            initialFirstRowIndex: initialFirstRowIndex,
+                            sort: sort,
+                            pageSize: pageSize,
+                            dataSource: dataSource!,
+                            onRowsPerPageChanged: _onRowsPerPageChanged,
+                            onPageChanged: _onPageChanged,
+                            onChanged: _onChanged,
+                            key: ValueKey(dataSource),
+                          )
+                        //_customListView(_currentResults)
+                        : _circularIndicator(),
+                  ]),
+              stateEdit.when(
+                waiting: () => Container(),
+                edit: (item) => Stack(
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        color: const Color(0x282D0102)),
+                    EditWidget(
+                      currentItem: item,
+                      onCancel: _onCancel,
+                      token: widget.token,
+                    ),
+                  ],
                 ),
-                _currentResults.isNotEmpty
-                    ? _customListView(_currentResults)
-                    : _circularIndicator(),
-              ]),
+                saved: () {
+                  _reload();
+                  return Container();
+                },
+                error: () => Container(),
+                add: () => Stack(
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        color: const Color(0x282D0102)),
+                    AddItemWidget(
+                      onCancel: _onCancel,
+                      token: widget.token,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         );
       },
       error: () => const Text('Ничего нет...'),
-      saving: (WarehouseItem warehouseItemSaving) {
-        return _circularIndicator();
-      },
-      saved: (WarehouseItem warehouseItemSaved) {
-        return _circularIndicator();
-      },
     );
   }
 
@@ -112,85 +168,75 @@ class _WarehouseListState extends State<WarehouseList> {
     );
   }
 
-  Widget _customListView(List<Item> currentResults) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: Theme.of(context).canvasColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Theme(
-        data: ThemeData.light()
-            .copyWith(cardColor: Theme.of(context).canvasColor),
-        child: PaginatedDataTable(
-          initialFirstRowIndex: initialFirstRowIndex,
-          sortColumnIndex: 0,
-          sortAscending: sort,
-          showEmptyRows: false,
-          showFirstLastButtons: true,
-          source: RowSource(
-            myData: _currentResults,
-            count: _currentItem.total,
-          ),
-          rowsPerPage: pageSize,
-          availableRowsPerPage: const [10, 20, 50],
-          onRowsPerPageChanged: (value){
-            if(pageSize!=value&&value!=null) {
-              setState(() {
-                pageSize = value;
-              });
-              _onChanged();
-            }
-          },
-          columnSpacing: 18,
-          onPageChanged: (value) async {
-            initialFirstRowIndex = value;
-            _isPagination = true;
-            currentPage = 1 + value ~/ pageSize;
-            if (value >= _currentResults.length) {
-              context.read<WarehouseBloc>().add(WarehouseEvent.fetch(
-                  page: currentPage,
-                  pageSize: pageSize,
-                  itemName: itemName,
-                  sortBy: 'name',
-                  sortOrder: sortOrder,
-                  token: widget.token));
-            }
-          },
-          columns: [
-            DataColumn(
-              label: const Text(
-                "Имя",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-              ),
-              onSort: (columnIndex, ascending) => _onChanged(),
-            ),
-            const DataColumn(
-              label: Text(
-                "Описание",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-              ),
-            ),
-            const DataColumn(
-              label: Text(
-                "Код",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  void _onRowsPerPageChanged(value) {
+    if (pageSize != value && value != null) {
+      setState(() {
+        pageSize = value;
+      });
+      _reload();
+    }
   }
 
-  void _onChanged([String? searchName]) {
+  void _onPageChanged(value) async {
+    initialFirstRowIndex = value;
+    final sum = 1 + value ~/ pageSize;
+    currentPage = sum.toInt();
+    if (value >= _currentResults.length) {
+      context.read<WarehouseBloc>().add(WarehouseEvent.fetch(
+          page: currentPage,
+          pageSize: pageSize,
+          itemName: itemName,
+          sortBy: 'name',
+          sortOrder: sortOrder,
+          token: widget.token));
+    }
+
+    setState(() {});
+  }
+
+  void _onEdit(Item item) async {
+    context.read<EditBloc>().add(EditEvent.start(item: item));
+  }
+
+  void _onCancel() {
+    context.read<EditBloc>().add(EditEvent.idle());
+  }
+
+  void _reload([String? searchName]) {
+    _currentResults = [];
+    currentPage = 1;
+    initialFirstRowIndex = 0;
+    context.read<WarehouseBloc>().add(WarehouseEvent.fetch(
+        page: 1,
+        pageSize: pageSize,
+        itemName: searchName ?? '',
+        sortBy: 'name',
+        sortOrder: sortOrder,
+        token: widget.token));
+  }
+
+  void _search([String? searchName]) {
+    _isPagination = true;
+    _currentResults = [];
+    currentPage = 1;
+    initialFirstRowIndex = 0;
+    context.read<WarehouseBloc>().add(WarehouseEvent.fetch(
+        page: 1,
+        pageSize: pageSize,
+        itemName: searchName ?? '',
+        sortBy: 'name',
+        sortOrder: sortOrder,
+        token: widget.token));
+  }
+
+  void _onChanged() {
     setState(() {
       sort = !sort;
     });
     _currentResults = [];
     currentPage = 1;
     initialFirstRowIndex = 0;
-    if (sort) {
+    if (!sort) {
       sortOrder = 'ASC';
     } else {
       sortOrder = 'DESC';
@@ -198,13 +244,9 @@ class _WarehouseListState extends State<WarehouseList> {
     context.read<WarehouseBloc>().add(WarehouseEvent.fetch(
         page: currentPage,
         pageSize: pageSize,
-        itemName: searchName ?? '',
+        itemName: '',
         sortBy: 'name',
         sortOrder: sortOrder,
         token: widget.token));
   }
-}
-
-class CustomPaginatedDataTable extends PaginatedDataTable{
-
 }

@@ -9,15 +9,19 @@ class WarehouseState with _$WarehouseState {
     required WarehouseItem warehouseItemLoaded,
   }) = WarehouseStateLoaded;
 
-  const factory WarehouseState.saving({
-    required WarehouseItem warehouseItemSaving,
-  }) = WarehouseStateSaving;
-
-  const factory WarehouseState.saved({
-    required WarehouseItem warehouseItemSaved,
-  }) = WarehouseStateSaved;
-
   const factory WarehouseState.error() = WarehouseStateError;
 
   factory WarehouseState.fromJson(Map<String, dynamic> json) => _$WarehouseStateFromJson(json);
+}
+
+@freezed
+class EditState with _$EditState {
+  const factory EditState.waiting() = EditStateWaiting;
+  const factory EditState.edit({required Item item}) = EditStateEdit;
+  const factory EditState.add() = EditStateAdd;
+  const factory EditState.saved() = EditStateSaved;
+
+  const factory EditState.error() = EditStateError;
+
+  factory EditState.fromJson(Map<String, dynamic> json) => _$EditStateFromJson(json);
 }

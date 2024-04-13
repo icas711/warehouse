@@ -33,36 +33,6 @@ Map<String, dynamic> _$$WarehouseStateLoadedImplToJson(
       'runtimeType': instance.$type,
     };
 
-_$WarehouseStateSavingImpl _$$WarehouseStateSavingImplFromJson(
-        Map<String, dynamic> json) =>
-    _$WarehouseStateSavingImpl(
-      warehouseItemSaving: WarehouseItem.fromJson(
-          json['warehouseItemSaving'] as Map<String, dynamic>),
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$WarehouseStateSavingImplToJson(
-        _$WarehouseStateSavingImpl instance) =>
-    <String, dynamic>{
-      'warehouseItemSaving': instance.warehouseItemSaving,
-      'runtimeType': instance.$type,
-    };
-
-_$WarehouseStateSavedImpl _$$WarehouseStateSavedImplFromJson(
-        Map<String, dynamic> json) =>
-    _$WarehouseStateSavedImpl(
-      warehouseItemSaved: WarehouseItem.fromJson(
-          json['warehouseItemSaved'] as Map<String, dynamic>),
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$WarehouseStateSavedImplToJson(
-        _$WarehouseStateSavedImpl instance) =>
-    <String, dynamic>{
-      'warehouseItemSaved': instance.warehouseItemSaved,
-      'runtimeType': instance.$type,
-    };
-
 _$WarehouseStateErrorImpl _$$WarehouseStateErrorImplFromJson(
         Map<String, dynamic> json) =>
     _$WarehouseStateErrorImpl(
@@ -71,6 +41,62 @@ _$WarehouseStateErrorImpl _$$WarehouseStateErrorImplFromJson(
 
 Map<String, dynamic> _$$WarehouseStateErrorImplToJson(
         _$WarehouseStateErrorImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$EditStateWaitingImpl _$$EditStateWaitingImplFromJson(
+        Map<String, dynamic> json) =>
+    _$EditStateWaitingImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$EditStateWaitingImplToJson(
+        _$EditStateWaitingImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$EditStateEditImpl _$$EditStateEditImplFromJson(Map<String, dynamic> json) =>
+    _$EditStateEditImpl(
+      item: Item.fromJson(json['item'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$EditStateEditImplToJson(_$EditStateEditImpl instance) =>
+    <String, dynamic>{
+      'item': instance.item,
+      'runtimeType': instance.$type,
+    };
+
+_$EditStateAddImpl _$$EditStateAddImplFromJson(Map<String, dynamic> json) =>
+    _$EditStateAddImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$EditStateAddImplToJson(_$EditStateAddImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$EditStateSavedImpl _$$EditStateSavedImplFromJson(Map<String, dynamic> json) =>
+    _$EditStateSavedImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$EditStateSavedImplToJson(
+        _$EditStateSavedImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$EditStateErrorImpl _$$EditStateErrorImplFromJson(Map<String, dynamic> json) =>
+    _$EditStateErrorImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$EditStateErrorImplToJson(
+        _$EditStateErrorImpl instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };

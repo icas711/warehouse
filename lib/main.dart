@@ -5,10 +5,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:warehouse/ui/pages/home_page.dart';
 
 void main() async {
-  BlocOverrides.runZoned(() => runApp(MyApp()),
+  /*BlocOverrides.runZoned(() => runApp(MyApp()),
     blocObserver: WarehouseBlocObservable(),
-  );
-
+  );*/
+  Bloc.observer =  WarehouseBlocObservable();
+  runApp(const MyApp());
 }
 
 
@@ -39,8 +40,9 @@ class MyApp extends StatelessWidget {
           displayMedium: TextStyle(
               fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black),
           displaySmall: TextStyle(fontSize: 24.0, color: Colors.black),
+          titleSmall: TextStyle(fontSize: 14.0, color: Colors.grey),
           bodyMedium: TextStyle(
-              fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.black),
+              fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.black),
           bodyLarge: TextStyle(
               fontSize: 12.0, fontWeight: FontWeight.w200, color: Colors.black),
           bodySmall: TextStyle(
