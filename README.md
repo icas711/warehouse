@@ -9,3 +9,6 @@ curl --location 'https://hcateringback-dev.unitbeandev.com/api/items?warehouseId
 --header 'Authorization: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMjM1MDgwMH0.PYtv4lvnbN7L6Tt71oVN8xPuK_36OUikIFqp5KPi-t4fOObulnXUjx_CfxuvEH-50oFvzSisTvt8pcL4hzqIHA' \
 
  => экран с пагинированной таблицей (учесть настраиваемое количество отображаемых на странице айтемов - со звездочкой) и поиском по названию для отображения номенклатурных позиций.
+
+=> создание/редактирование номенклатурных позиций. Метод для создания: https://hcateringback-dev.unitbeandev.com/api/items. POSt Метод для редактирования: https://hcateringback-dev.unitbeandev.com/api/items/{id}. PATCH
+Cоздание по нажатию на кнопку "Новая позиция", редактирование - по нажатию на иконку карандаша напротив номенклатурной позиции. В режиме редактирования в заголовке модалки вместо "Новвая позиция" отображать название редактируемой позиции.
